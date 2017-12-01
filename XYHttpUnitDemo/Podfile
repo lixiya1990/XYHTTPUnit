@@ -8,6 +8,5 @@ target 'XYHttpUnitDemo' do
   # Pods for XYHttpUnitDemo
   
   pod 'AFNetworking'
-  pod 'YYKit'
 
 end

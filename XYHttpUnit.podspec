@@ -11,6 +11,5 @@ s.source       = { :git => "https://github.com/lixiya1990/XYHttpUnit.git", :tag 
 s.source_files  =  "Classess/**/*.{h,m}" #需要托管的源代码路径
 s.requires_arc = true #是否支持ARC
 s.dependency "AFNetworking"    #所依赖的第三方库，没有就不用写
-s.dependency "YYKit"    #所依赖的第三方库，没有就不用写
 
 end
