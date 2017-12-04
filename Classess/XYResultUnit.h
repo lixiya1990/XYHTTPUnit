@@ -26,7 +26,4 @@
 - (void)setDataFromCache:(BOOL)fromCache;
 - (void)setFailureRequest:(BOOL)failureRequest;
 
-+ (XYResultUnit *)resultWithError:(NSError *)error;
-+ (XYResultUnit *)resultWithResponseObject:(NSDictionary *)responseObject;
-
 @end

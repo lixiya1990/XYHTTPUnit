@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "XYHTTPSessionCacheUnit.h"
 
 @interface ViewController ()
 
@@ -16,9 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
  
-    NSProxy
+    [[XYHTTPSessionCacheUnit manager] requestURL:@"" HTTPMethod:XYHTTPMethodGet parameters:nil cacheArgumentBlock:^(XYCacheArgument * _Nonnull cacheArgument) {
+        
+    } uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } completeBlock:^(NSURLSessionTask * _Nullable task, XYResultUnit * _Nonnull result) {
+        
+    }];
+    
+
 }
 
 

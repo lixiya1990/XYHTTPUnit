@@ -21,6 +21,9 @@
 		89160A251FC2D552000026FE /* NSString+XYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 89160A1B1FC2D552000026FE /* NSString+XYCache.m */; };
 		89160A261FC2D552000026FE /* XYMultipartFormArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 89160A1C1FC2D552000026FE /* XYMultipartFormArgument.m */; };
 		89160A271FC2D552000026FE /* XYHTTPSessionCacheUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 89160A1D1FC2D552000026FE /* XYHTTPSessionCacheUnit.m */; };
+		89650AF91FD5499E00E3FC63 /* XYResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 89650AF81FD5499E00E3FC63 /* XYResult.m */; };
+		89650AFC1FD549BE00E3FC63 /* XYHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89650AFB1FD549BE00E3FC63 /* XYHttpManager.m */; };
+		89650AFF1FD54A1700E3FC63 /* XYDataReqHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89650AFE1FD54A1700E3FC63 /* XYDataReqHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,12 @@
 		89160A1E1FC2D552000026FE /* XYResultUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYResultUnit.h; sourceTree = "<group>"; };
 		89160A1F1FC2D552000026FE /* XYMultipartFormArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMultipartFormArgument.h; sourceTree = "<group>"; };
 		89160A201FC2D552000026FE /* XYHTTPSessionUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYHTTPSessionUnit.h; sourceTree = "<group>"; };
+		89650AF71FD5499E00E3FC63 /* XYResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYResult.h; sourceTree = "<group>"; };
+		89650AF81FD5499E00E3FC63 /* XYResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYResult.m; sourceTree = "<group>"; };
+		89650AFA1FD549BE00E3FC63 /* XYHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYHttpManager.h; sourceTree = "<group>"; };
+		89650AFB1FD549BE00E3FC63 /* XYHttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYHttpManager.m; sourceTree = "<group>"; };
+		89650AFD1FD54A1700E3FC63 /* XYDataReqHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYDataReqHelper.h; sourceTree = "<group>"; };
+		89650AFE1FD54A1700E3FC63 /* XYDataReqHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYDataReqHelper.m; sourceTree = "<group>"; };
 		9D5AC88916CE4BB83729AD4E /* Pods-XYHttpUnitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XYHttpUnitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-XYHttpUnitDemo/Pods-XYHttpUnitDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +104,7 @@
 		891609F91FC2D50F000026FE /* XYHttpUnitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				89650AF61FD5497F00E3FC63 /* XYHttpReq */,
 				891609FA1FC2D50F000026FE /* AppDelegate.h */,
 				891609FB1FC2D50F000026FE /* AppDelegate.m */,
 				891609FD1FC2D50F000026FE /* ViewController.h */,
@@ -144,6 +154,19 @@
 				89160A1B1FC2D552000026FE /* NSString+XYCache.m */,
 			);
 			path = category;
+			sourceTree = "<group>";
+		};
+		89650AF61FD5497F00E3FC63 /* XYHttpReq */ = {
+			isa = PBXGroup;
+			children = (
+				89650AF71FD5499E00E3FC63 /* XYResult.h */,
+				89650AF81FD5499E00E3FC63 /* XYResult.m */,
+				89650AFA1FD549BE00E3FC63 /* XYHttpManager.h */,
+				89650AFB1FD549BE00E3FC63 /* XYHttpManager.m */,
+				89650AFD1FD54A1700E3FC63 /* XYDataReqHelper.h */,
+				89650AFE1FD54A1700E3FC63 /* XYDataReqHelper.m */,
+			);
+			path = XYHttpReq;
 			sourceTree = "<group>";
 		};
 		DA5BA8BC1BFBC25AAB574FBA /* Pods */ = {
@@ -280,13 +303,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89650AFF1FD54A1700E3FC63 /* XYDataReqHelper.m in Sources */,
 				891609FF1FC2D50F000026FE /* ViewController.m in Sources */,
 				89160A211FC2D552000026FE /* XYResultUnit.m in Sources */,
+				89650AFC1FD549BE00E3FC63 /* XYHttpManager.m in Sources */,
 				89160A241FC2D552000026FE /* XYCacheUnit.m in Sources */,
 				89160A221FC2D552000026FE /* XYHTTPSessionUnit.m in Sources */,
 				89160A0A1FC2D50F000026FE /* main.m in Sources */,
 				89160A251FC2D552000026FE /* NSString+XYCache.m in Sources */,
 				89160A271FC2D552000026FE /* XYHTTPSessionCacheUnit.m in Sources */,
+				89650AF91FD5499E00E3FC63 /* XYResult.m in Sources */,
 				89160A231FC2D552000026FE /* XYCacheArgument.m in Sources */,
 				891609FC1FC2D50F000026FE /* AppDelegate.m in Sources */,
 				89160A261FC2D552000026FE /* XYMultipartFormArgument.m in Sources */,

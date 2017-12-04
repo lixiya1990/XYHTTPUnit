@@ -30,7 +30,7 @@ typedef NS_OPTIONS(NSUInteger, XYCacheArgumentOptions) {
 
 /** 缓存有效期 单位:秒 默认:0秒*/
 @property (nonatomic, assign) NSInteger cacheTimeInSeconds;
-/** 离线缓存的有效期 单位:秒,默认:7200秒*/
+/** 离线缓存的有效期 单位:秒,默认:7200秒 ，2个小时*/
 @property (nonatomic, assign) NSInteger offlineTimeInSeconds;
 
 - (instancetype)initWithKey:(NSString *)key;
