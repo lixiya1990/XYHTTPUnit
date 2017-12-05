@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /* 请求结果回调 */
-typedef void(^OperationCompleteBlock)(NSURLSessionTask * __nullable task, XYResultUnit * result);
+typedef void(^OperationCompleteBlock)(NSURLSessionTask * __nullable task, XYResultUnit * resultUnit);
 
 @interface XYHTTPSessionCacheUnit : XYHTTPSessionUnit
 
@@ -31,6 +31,14 @@ typedef void(^OperationCompleteBlock)(NSURLSessionTask * __nullable task, XYResu
                       jsonParameters:(NSDictionary *)parameters
                        completeBlock:(nullable OperationCompleteBlock)completeBlock;
 
+/**
+ 上传文件，有上传进度回调,只适用于Post请求
+ */
+- (NSURLSessionDataTask *)requestURL:(NSString *)URLString
+                          parameters:(nullable id)parameters
+              multipartFormArguments:(NSArray<XYMultipartFormArgument *> *)formArguments
+                            progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgress
+                       completeBlock:(nullable OperationCompleteBlock)completeBlock;
 
 
 /** 指定url地址的请求 */
@@ -38,7 +46,6 @@ typedef void(^OperationCompleteBlock)(NSURLSessionTask * __nullable task, XYResu
                           HTTPMethod:(XYHTTPMethod)method
                           parameters:(nullable id)parameters
                        completeBlock:(nullable OperationCompleteBlock)completeBlock;
-
 
 
 /** 指定url地址的请求 有进度回调 */

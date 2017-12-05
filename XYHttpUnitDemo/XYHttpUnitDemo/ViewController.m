@@ -18,16 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    [[XYHTTPSessionCacheUnit manager] requestURL:@"" HTTPMethod:XYHTTPMethodGet parameters:nil cacheArgumentBlock:^(XYCacheArgument * _Nonnull cacheArgument) {
-        
-    } uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } completeBlock:^(NSURLSessionTask * _Nullable task, XYResultUnit * _Nonnull result) {
-        
-    }];
-    
+    NSLog(@"--%@",[[UIDevice currentDevice] model]);
 
 }
 

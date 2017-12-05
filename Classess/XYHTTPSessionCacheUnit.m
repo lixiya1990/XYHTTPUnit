@@ -55,6 +55,27 @@
     return dataTask;
 }
 
+
+- (NSURLSessionDataTask *)requestURL:(NSString *)URLString
+                          parameters:(id)parameters
+              multipartFormArguments:(NSArray<XYMultipartFormArgument *> *)formArguments
+                            progress:(void (^)(NSProgress * _Nonnull))uploadProgress
+                       completeBlock:(OperationCompleteBlock)completeBlock {
+    return [self requestURL:URLString parameters:parameters multipartFormArguments:formArguments progress:uploadProgress success:^(NSURLSessionTask * _Nonnull task, id  _Nullable responseObject) {
+        [self operationSuccessWithNSURLSessionTask:task
+                                    responseObject:responseObject
+                                     cacheArgument:nil
+                                     completeBlock:completeBlock];
+    } failure:^(NSURLSessionTask * _Nullable task, NSError * _Nonnull error) {
+        [self operationFailureWithNSURLSessionTask:task
+                                             error:error
+                                     cacheArgument:nil
+                                     completeBlock:completeBlock];
+    }];
+    
+}
+
+
 - (NSURLSessionDataTask *)requestURL:(NSString *)URLString
                           HTTPMethod:(XYHTTPMethod)method
                           parameters:(id)parameters

@@ -7,6 +7,7 @@
 //
 
 #import "XYHTTPSessionCacheUnit.h"
+#import "XYResult.h"
 
 @interface XYHttpManager : XYHTTPSessionCacheUnit
 
