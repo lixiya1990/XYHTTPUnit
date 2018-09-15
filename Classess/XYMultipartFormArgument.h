@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-NS_ASSUME_NONNULL_BEGIN
 
 /** 文件类型 */
 typedef NS_ENUM(NSInteger ,XYMultipartFormContentType) {
@@ -32,4 +31,3 @@ typedef NS_ENUM(NSInteger ,XYMultipartFormContentType) {
                                            dataValues:(NSArray *)dataValues;
 
 @end
-NS_ASSUME_NONNULL_END

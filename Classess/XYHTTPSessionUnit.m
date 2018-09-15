@@ -16,18 +16,16 @@ static NSTimeInterval KUploadTimeoutInterval = 60;
 
 - (instancetype)initWithBaseURL:(NSURL *)url sessionConfiguration:(NSURLSessionConfiguration *)configuration {
     self = [super initWithBaseURL:url sessionConfiguration:configuration];
-    if (!self) {
-        return nil;
+    if (self) {
+        // 默认超时时间
+        self.requestSerializer.timeoutInterval = kNormalTimeoutInterval;
+        
+        // 网络请求时开启风火轮
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+        
+        // 开启网络状态监控
+        [[AFNetworkReachabilityManager manager] startMonitoring];
     }
-    // 默认超时时间
-    self.requestSerializer.timeoutInterval = kNormalTimeoutInterval;
-    
-    // 网络请求时开启风火轮
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
-    // 开启网络状态监控
-    [[AFNetworkReachabilityManager manager] startMonitoring];
-    
     return self;
 }
 
@@ -51,8 +49,8 @@ static NSTimeInterval KUploadTimeoutInterval = 60;
 
 
 - (NSURLSessionDataTask *)request:(NSURLRequest *)request
-                   uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
-                 downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+                   uploadProgress:(void (^)(NSProgress *uploadProgress))uploadProgressBlock
+                 downloadProgress:(void (^)(NSProgress *downloadProgress))downloadProgressBlock
                           success:(OperationSuccessCompleteBlock)success
                           failure:(OperationFailureCompleteBlock)failure {
     
@@ -112,8 +110,8 @@ static NSTimeInterval KUploadTimeoutInterval = 60;
 - (NSURLSessionDataTask *)requestURL:(NSString *)URLString
                           HTTPMethod:(XYHTTPMethod)method
                           parameters:(id)parameters
-                      uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgress
-                    downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgress
+                      uploadProgress:(void (^)(NSProgress *))uploadProgress
+                    downloadProgress:(void (^)(NSProgress *))downloadProgress
                              success:(OperationSuccessCompleteBlock)success
                              failure:(OperationFailureCompleteBlock)failure {
     
@@ -193,7 +191,7 @@ static NSTimeInterval KUploadTimeoutInterval = 60;
 - (NSURLSessionDataTask *)requestURL:(NSString *)URLString
                           parameters:(id)parameters
               multipartFormArguments:(NSArray<XYMultipartFormArgument *> *)formArguments
-                            progress:(void (^)(NSProgress * _Nonnull))uploadProgress
+                            progress:(void (^)(NSProgress *))uploadProgress
                              success:(OperationSuccessCompleteBlock)success
                              failure:(OperationFailureCompleteBlock)failure {
     
@@ -259,7 +257,7 @@ static NSTimeInterval KUploadTimeoutInterval = 60;
 - (NSURLSessionDownloadTask *)requestURL:(NSString *)URLString
                           parameters:(id)parameters
                          downFileDir:(NSString *)fileDir
-                            progress:(void (^)(NSProgress * _Nonnull))downloadProgress
+                            progress:(void (^)(NSProgress *))downloadProgress
                              success:(OperationSuccessCompleteBlock)success
                              failure:(OperationFailureCompleteBlock)failure {
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
@@ -291,10 +289,7 @@ static NSTimeInterval KUploadTimeoutInterval = 60;
     
     [dataTask resume];
     return dataTask;
-    
-    
 }
-
 
 #pragma mark - Privates
 - (void)operationSuccessWithNSURLSessionTask:(NSURLSessionTask *)task

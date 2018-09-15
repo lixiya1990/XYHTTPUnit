@@ -18,8 +18,8 @@
 }
 
 - (NSURLSessionDataTask *)request:(NSURLRequest *)request
-                   uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
-                 downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+                   uploadProgress:(void (^)(NSProgress *))uploadProgressBlock
+                 downloadProgress:(void (^)(NSProgress *))downloadProgressBlock
                     completeBlock:(OperationCompleteBlock)completeBlock {
     
     NSURLSessionDataTask *dataTask = nil;
@@ -59,7 +59,7 @@
 - (NSURLSessionDataTask *)requestURL:(NSString *)URLString
                           parameters:(id)parameters
               multipartFormArguments:(NSArray<XYMultipartFormArgument *> *)formArguments
-                            progress:(void (^)(NSProgress * _Nonnull))uploadProgress
+                            progress:(void (^)(NSProgress *))uploadProgress
                        completeBlock:(OperationCompleteBlock)completeBlock {
     return [self requestURL:URLString parameters:parameters multipartFormArguments:formArguments progress:uploadProgress success:^(NSURLSessionTask * _Nonnull task, id  _Nullable responseObject) {
         [self operationSuccessWithNSURLSessionTask:task
@@ -75,6 +75,25 @@
     
 }
 
+- (NSURLSessionDownloadTask *)requestURL:(NSString *)URLString
+                              parameters:(id)parameters
+                             downFileDir:(NSString *)fileDir
+                                progress:(void (^)(NSProgress *downloadProgress))downloadProgress
+                           completeBlock:(OperationCompleteBlock)completeBlock {
+    
+    return [self requestURL:URLString parameters:parameters downFileDir:fileDir progress:downloadProgress success:^(NSURLSessionTask *task, id responseObject) {
+        [self operationSuccessWithNSURLSessionTask:task
+                                    responseObject:responseObject
+                                     cacheArgument:nil
+                                     completeBlock:completeBlock];
+    } failure:^(NSURLSessionTask *task, NSError *error) {
+        [self operationFailureWithNSURLSessionTask:task
+                                             error:error
+                                     cacheArgument:nil
+                                     completeBlock:completeBlock];
+    }];
+}
+
 
 - (NSURLSessionDataTask *)requestURL:(NSString *)URLString
                           HTTPMethod:(XYHTTPMethod)method
@@ -83,18 +102,25 @@
     return [self requestURL:URLString HTTPMethod:method parameters:parameters cacheArgumentBlock:nil uploadProgress:nil downloadProgress:nil completeBlock:completeBlock];
 }
 
+- (NSURLSessionDataTask *)requestURL:(NSString *)URLString
+                          HTTPMethod:(XYHTTPMethod)method
+                          parameters:(id)parameters
+                  cacheArgumentBlock:(void (^)(XYCacheArgument *cacheArgument))cacheArgumentBlock
+                       completeBlock:(OperationCompleteBlock)completeBlock {
+    return [self requestURL:URLString HTTPMethod:method parameters:parameters cacheArgumentBlock:cacheArgumentBlock uploadProgress:nil downloadProgress:nil completeBlock:completeBlock];
+}
 
 - (NSURLSessionDataTask *)requestURL:(NSString *)URLString
                           HTTPMethod:(XYHTTPMethod)method
                           parameters:(id)parameters
-                  cacheArgumentBlock:(void (^)(XYCacheArgument * _Nonnull))cacheArgumentBlock
-                      uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgress
-                    downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgress
+                  cacheArgumentBlock:(void (^)(XYCacheArgument *))cacheArgumentBlock
+                      uploadProgress:(void (^)(NSProgress *))uploadProgress
+                    downloadProgress:(void (^)(NSProgress *))downloadProgress
                        completeBlock:(OperationCompleteBlock)completeBlock {
     
     NSString *key = [self cacheKeyWithBaseURL:[[self baseURL] absoluteString] requestUR:URLString HTTPMethod:method parameters:parameters];
     
-    XYCacheArgument *cacheArgument = [[XYCacheArgument alloc] initWithKey:key];
+    __block XYCacheArgument *cacheArgument = [[XYCacheArgument alloc] initWithKey:key];
     if (cacheArgumentBlock) {
         cacheArgumentBlock(cacheArgument);
     }
